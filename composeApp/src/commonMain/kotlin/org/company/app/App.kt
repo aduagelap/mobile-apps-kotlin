@@ -9,5 +9,5 @@ import org.company.app.components.Home
 internal fun App() = AppTheme {
 //    Default().homeScreen()
     Home().homeScreen()
-    // test22
+    // test222
 }
