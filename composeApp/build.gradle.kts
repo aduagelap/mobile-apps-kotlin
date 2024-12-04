@@ -32,6 +32,10 @@ kotlin {
             implementation(libs.ktor.client.serialization)
             implementation(libs.ktor.client.logging)
             implementation(libs.kotlinx.serialization.json)
+            implementation(libs.navigator)
+            api(compose.foundation)
+            api(compose.animation)
+            api("moe.tlaster:precompose:1.7.0-alpha03")
         }
 
         commonTest.dependencies {

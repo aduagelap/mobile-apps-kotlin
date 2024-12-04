@@ -1,13 +1,16 @@
 package org.company.app
 
 import androidx.compose.runtime.*
-import org.company.app.components.Default
+import moe.tlaster.precompose.navigation.rememberNavigator
+import org.company.app.Navigator.Navigation
 import org.company.app.theme.AppTheme
-import org.company.app.components.Home
 
 @Composable
 internal fun App() = AppTheme {
 //    Default().homeScreen()
-    Home().homeScreen()
-    // test222
+//    Home().homeScreen()
+//    DialogLogin().HomeScreen()
+    val navigator = rememberNavigator()
+    Navigation(navigator).Navigator()
 }
+
