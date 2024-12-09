@@ -35,7 +35,7 @@ class Home {
                     onClick = { navigator.navigate("/login") },
                     colors = ButtonDefaults.buttonColors(Color(0xff00a2ff)),
                 ) {
-                    Text("Home")
+                    Text("Login")
                 }
 
                 Button(
@@ -43,6 +43,24 @@ class Home {
                     colors = ButtonDefaults.buttonColors(Color(0xff00a2ff)),
                 ) {
                     Text("Item Detail")
+                }
+                Button(
+                    onClick = { navigator.navigate("/bluetooth") },
+                    colors = ButtonDefaults.buttonColors(Color(0xff00a2ff)),
+                ) {
+                    Text("Bluetooth")
+                }
+                Button(
+                    onClick = { navigator.navigate("/location") },
+                    colors = ButtonDefaults.buttonColors(Color(0xff00a2ff)),
+                ) {
+                    Text("Location")
+                }
+                Button(
+                    onClick = { navigator.navigate("/internet") },
+                    colors = ButtonDefaults.buttonColors(Color(0xff00a2ff)),
+                ) {
+                    Text("Internet Connection")
                 }
             }
         }

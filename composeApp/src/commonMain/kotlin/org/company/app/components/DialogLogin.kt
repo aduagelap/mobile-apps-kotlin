@@ -2,7 +2,9 @@ package org.company.app.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -30,31 +32,34 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.blur
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import ez_tenant_kotlin.composeapp.generated.resources.Res
 import ez_tenant_kotlin.composeapp.generated.resources.iconbuilding
 import ez_tenant_kotlin.composeapp.generated.resources.iconpasshidden
 import ez_tenant_kotlin.composeapp.generated.resources.iconpassshow
 import ez_tenant_kotlin.composeapp.generated.resources.iconpassword
 import ez_tenant_kotlin.composeapp.generated.resources.logo
+import io.ktor.http.Cookie
 import moe.tlaster.precompose.navigation.Navigator
 import org.jetbrains.compose.resources.painterResource
 
-class DialogLogin() {
+class DialogLogin {
     @Composable
     fun LoginScreen(navigator: Navigator) {
+        Cookie
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
                 .background(Color.White)
                 .windowInsetsPadding(WindowInsets.safeDrawing),
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             item {
                 Image(
@@ -73,12 +78,10 @@ class DialogLogin() {
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 40.dp)
+                        .padding(horizontal = 40.dp, vertical = 60.dp)
                 ) {
                     OutlinedTextField(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .blur(30.dp, 30.dp),
+                        modifier = Modifier.fillMaxWidth(),
                         value = project,
                         onValueChange = { project = it },
                         label = { Text("Project") },
@@ -93,8 +96,7 @@ class DialogLogin() {
                     )
 
                     OutlinedTextField(
-                        modifier = Modifier
-                            .fillMaxWidth(),
+                        modifier = Modifier.fillMaxWidth(),
                         value = username,
                         onValueChange = { username = it },
                         label = { Text("Username") },
@@ -109,8 +111,7 @@ class DialogLogin() {
                     )
 
                     OutlinedTextField(
-                        modifier = Modifier
-                            .fillMaxWidth(),
+                        modifier = Modifier.fillMaxWidth(),
                         value = password,
                         visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
@@ -138,18 +139,38 @@ class DialogLogin() {
                         },
                     )
 
-                    Text(
-                        text = ("Forgot Password"),
-                        textAlign = TextAlign.End,
+                    Row(
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(0.dp, 5.dp, 0.dp, 5.dp)
-                    )
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text(
+                            text = ("Register Here"),
+                            textAlign = TextAlign.Start,
+                            style = TextStyle(fontSize = 12.sp),
+                            modifier = Modifier
+                                .padding(0.dp, 5.dp, 0.dp, 5.dp)
+                        )
+
+                        Text(
+                            text = ("Forgot Password"),
+                            textAlign = TextAlign.Start,
+                            style = TextStyle(fontSize = 12.sp),
+                            modifier = Modifier
+                                .padding(0.dp, 5.dp, 0.dp, 5.dp)
+                        )
+                    }
                 }
 
 
                 Button(
-                    onClick = { navigator.navigate("/home") },
+                    onClick = {
+                        if (project.isNotEmpty() && username.isNotEmpty() && password.isNotEmpty()) {
+                            navigator.navigate("/home/${username}")
+                        } else {
+                            println("Please fill field")
+                        }
+                    },
                     colors = ButtonDefaults.buttonColors(Color(0xff00a2ff)),
                 ) {
                     Text("Login")
@@ -158,3 +179,4 @@ class DialogLogin() {
         }
     }
 }
+

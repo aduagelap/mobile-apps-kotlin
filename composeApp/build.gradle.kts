@@ -33,6 +33,9 @@ kotlin {
             implementation(libs.ktor.client.logging)
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.navigator)
+            implementation("com.google.android.gms:play-services-location:21.1.0")
+            implementation("com.google.accompanist:accompanist-permissions:0.35.0-alpha")
+            implementation("network.chaintech:compose-connectivity-monitor:1.0.0")
             api(compose.foundation)
             api(compose.animation)
             api("moe.tlaster:precompose:1.7.0-alpha03")
@@ -60,7 +63,7 @@ android {
     compileSdk = 35
 
     defaultConfig {
-        minSdk = 21
+        minSdk = 24
         targetSdk = 35
 
         applicationId = "org.company.app.androidApp"
